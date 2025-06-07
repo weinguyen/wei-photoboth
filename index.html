@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>✨ Wei PhotoBooth Pro ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Wei PhotoBooth">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Prevent zoom on inputs -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+<body>
+    <!-- Magic Particles Background (Reduced) -->
+    <div class="magic-bg">
+        <div class="sparkles" id="sparkles"></div>
+        <div class="floating-hearts"></div>
+    </div>
+
+    <!-- Header with reduced effects -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <span class="logo-icon">
+                    <i class="fas fa-camera"></i>
+                </span>
+                <span class="logo-text">
+                    Wei PhotoBooth
+                    <span class="pro-badge">PRO</span>
+                </span>
+            </h1>
+            <p class="tagline">
+                <span class="tagline-text">Chụp ảnh & quay video đẹp với hiệu ứng ma thuật!</span>
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Camera Section -->
+        <div class="camera-section glass-card" id="cameraSection">
+            <div class="camera-container">
+                <div class="camera-frame">
+                    <video id="video" autoplay muted playsinline></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+
+                    <!-- Camera Overlay -->
+                    <div class="camera-overlay">
+                        <div class="frame-effect">
+                            <div class="corner corner-tl"></div>
+                            <div class="corner corner-tr"></div>
+                            <div class="corner corner-bl"></div>
+                            <div class="corner corner-br"></div>
+                        </div>
+                        <div class="countdown" id="countdown"></div>
+                        <div class="capture-flash" id="captureFlash"></div>
+
+                        <!-- Recording Indicator -->
+                        <div class="recording-indicator" id="recordingIndicator">
+                            <div class="rec-dot"></div>
+                            <span class="rec-text">REC</span>
+                            <span class="rec-time" id="recordingTime">00:00</span>
+                        </div>
+
+                        <!-- Auto Capture Progress -->
+                        <div class="auto-capture-progress" id="autoCaptureProgress">
+                            <div class="progress-info">
+                                <span class="current-shot">1</span>/<span class="total-shots">5</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Camera Controls -->
+                <div class="camera-controls">
+                    <button class="btn btn-secondary magic-btn" id="switchCamera">
+                        <div class="btn-content">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Đổi Camera</span>
+                        </div>
+                    </button>
+
+                    <!-- Auto Capture Controls -->
+                    <div class="auto-capture-controls">
+                        <label for="photoCount">Số ảnh:</label>
+                        <select id="photoCount" class="photo-count-select">
+                            <option value="1">1 ảnh</option>
+                            <option value="3">3 ảnh</option>
+                            <option value="5" selected>5 ảnh</option>
+                            <option value="10">10 ảnh</option>
+                        </select>
+                        <button class="btn btn-info magic-btn" id="autoCaptureBtn">
+                            <div class="btn-content">
+                                <i class="fas fa-camera-retro"></i>
+                                <span>Chụp Liên Tiếp</span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <button class="btn btn-primary capture-btn magic-btn" id="captureBtn">
+                        <div class="btn-content">
+                            <div class="capture-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <span>Chụp Ảnh</span>
+                        </div>
+                    </button>
+
+                    <!-- Video Recording Button -->
+                    <button class="btn btn-danger magic-btn" id="recordBtn">
+                        <div class="btn-content">
+                            <i class="fas fa-video"></i>
+                            <span>Quay Video</span>
+                        </div>
+                    </button>
+
+                    <button class="btn btn-secondary magic-btn" id="effectsToggle">
+                        <div class="btn-content">
+                            <i class="fas fa-magic"></i>
+                            <span>Hiệu Ứng</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Effects Panel -->
+            <div class="effects-panel glass-panel" id="effectsPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-palette"></i> Hiệu Ứng</h3>
+                </div>
+                <div class="effects-grid">
+                    <button class="effect-btn glass-btn active" data-effect="none">
+                        <div class="effect-icon"><i class="fas fa-times"></i></div>
+                        <span>Gốc</span>
+                    </button>
+                    <button class="effect-btn glass-btn" data-effect="vintage">
+                        <div class="effect-icon"><i class="fas fa-film"></i></div>
+                        <span>Vintage</span>
+                    </button>
+                    <button class="effect-btn glass-btn" data-effect="bw">
+                        <div class="effect-icon"><i class="fas fa-adjust"></i></div>
+                        <span>Đen Trắng</span>
+                    </button>
+                    <button class="effect-btn glass-btn" data-effect="sepia">
+                        <div class="effect-icon"><i class="fas fa-sun"></i></div>
+                        <span>Sepia</span>
+                    </button>
+                    <button class="effect-btn glass-btn" data-effect="neon">
+                        <div class="effect-icon"><i class="fas fa-bolt"></i></div>
+                        <span>Neon</span>
+                    </button>
+                    <button class="effect-btn glass-btn" data-effect="rainbow">
+                        <div class="effect-icon"><i class="fas fa-rainbow"></i></div>
+                        <span>Cầu Vồng</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Gallery Section -->
+        <div class="gallery-section glass-card" id="gallerySection">
+            <div class="gallery-header">
+                <h2>
+                    <i class="fas fa-images"></i>
+                    <span>Bộ Sưu Tập</span>
+                </h2>
+                <div class="gallery-controls">
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="grid" title="Lưới">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list" title="Danh sách">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="view-btn" data-view="masonry" title="Gạch">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                    </div>
+                    <div class="gallery-stats">
+                        <span class="media-count">0 file</span>
+                    </div>
+                    <button class="btn btn-danger btn-sm" id="clearGallery">
+                        <i class="fas fa-trash"></i>
+                        <span>Xóa Tất Cả</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="gallery-container">
+                <div class="gallery-grid" id="galleryGrid">
+                    <div class="empty-gallery">
+                        <div class="empty-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <p>Chưa có ảnh hoặc video nào.<br>Hãy chụp ảnh hoặc quay video đầu tiên!</p>
+                        <div class="empty-arrow">👆</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Flying Animation Container -->
+    <div class="flying-photo-container" id="flyingPhotoContainer"></div>
+
+    <!-- Enhanced Photo Editor Modal -->
+    <div class="modal magical-modal" id="editorModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-magic"></i>
+                    <span>Chỉnh Sửa Ảnh</span>
+                </h2>
+                <button class="close-btn" id="closeEditor">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="editor-content">
+                <div class="editor-preview">
+                    <div class="canvas-container">
+                        <canvas id="editorCanvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="editor-controls glass-panel">
+                    <!-- Sticker Section will be created dynamically -->
+
+                    <!-- Filters Tab -->
+                    <div class="tab-content" id="filtersTab">
+                        <div class="section-header">
+                            <h3><i class="fas fa-filter"></i> Bộ Lọc</h3>
+                        </div>
+                        <div class="filters-grid">
+                            <button class="filter-btn glass-btn active" data-filter="none">
+                                <div class="filter-preview original"></div>
+                                <span>Gốc</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="vintage">
+                                <div class="filter-preview vintage"></div>
+                                <span>Vintage</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="bw">
+                                <div class="filter-preview bw"></div>
+                                <span>Đen Trắng</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="sepia">
+                                <div class="filter-preview sepia"></div>
+                                <span>Sepia</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="cool">
+                                <div class="filter-preview cool"></div>
+                                <span>Lạnh</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="warm">
+                                <div class="filter-preview warm"></div>
+                                <span>Ấm</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="dramatic">
+                                <div class="filter-preview dramatic"></div>
+                                <span>Kịch Tính</span>
+                            </button>
+                            <button class="filter-btn glass-btn" data-filter="dream">
+                                <div class="filter-preview dream"></div>
+                                <span>Mơ Mộng</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Adjustments -->
+                    <div class="adjustments-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-sliders-h"></i> Điều Chỉnh</h3>
+                        </div>
+                        <div class="slider-group">
+                            <label><i class="fas fa-sun"></i> Độ Sáng</label>
+                            <div class="slider-container">
+                                <input type="range" id="brightness" min="-100" max="100" value="0" class="magic-slider">
+                            </div>
+                        </div>
+                        <div class="slider-group">
+                            <label><i class="fas fa-adjust"></i> Độ Tương Phản</label>
+                            <div class="slider-container">
+                                <input type="range" id="contrast" min="-100" max="100" value="0" class="magic-slider">
+                            </div>
+                        </div>
+                        <div class="slider-group">
+                            <label><i class="fas fa-palette"></i> Độ Bão Hòa</label>
+                            <div class="slider-container">
+                                <input type="range" id="saturation" min="-100" max="100" value="0" class="magic-slider">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Background Section -->
+                    <div class="background-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-image"></i> Nền</h3>
+                        </div>
+                        <div class="background-grid">
+                            <button class="bg-btn glass-btn active" data-bg="none">
+                                <div class="bg-preview transparent"></div>
+                                <span>Gốc</span>
+                            </button>
+                            <button class="bg-btn glass-btn" data-bg="galaxy">
+                                <div class="bg-preview galaxy"></div>
+                                <span>Thiên Hà</span>
+                            </button>
+                            <button class="bg-btn glass-btn" data-bg="aurora">
+                                <div class="bg-preview aurora"></div>
+                                <span>Cực Quang</span>
+                            </button>
+                            <button class="bg-btn glass-btn" data-bg="sunset">
+                                <div class="bg-preview sunset"></div>
+                                <span>Hoàng Hôn</span>
+                            </button>
+                            <button class="bg-btn glass-btn" data-bg="ocean">
+                                <div class="bg-preview ocean"></div>
+                                <span>Đại Dương</span>
+                            </button>
+                            <button class="bg-btn glass-btn" data-bg="forest">
+                                <div class="bg-preview forest"></div>
+                                <span>Rừng</span>
+                            </button>
+                        </div>
+                        <div class="custom-bg-upload">
+                            <input type="file" id="customBg" accept="image/*">
+                            <label for="customBg" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-upload"></i>
+                                <span>Tải Nền</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="resetEditor">
+                    <i class="fas fa-undo"></i>
+                    <span>Làm Lại</span>
+                </button>
+                <button class="btn btn-success" id="saveEdit">
+                    <i class="fas fa-save"></i>
+                    <span>Lưu Ảnh</span>
+                </button>
+                <button class="btn btn-primary" id="downloadEdit">
+                    <i class="fas fa-download"></i>
+                    <span>Tải Xuống</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Preview Modal -->
+    <div class="modal magical-modal" id="videoModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-video"></i>
+                    <span>Xem Video</span>
+                </h2>
+                <button class="close-btn" id="closeVideoModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="video-preview-content">
+                <video id="videoPreview" controls></video>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="downloadVideo">
+                    <i class="fas fa-download"></i>
+                    <span>Tải Video</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading magical-loading" id="loading">
+        <div class="loading-content">
+            <div class="magic-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-center">✨</div>
+            </div>
+            <p class="loading-text">Đang xử lý...</p>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast magical-toast" id="toast">
+        <div class="toast-icon">
+            <i class="fas fa-magic"></i>
+        </div>
+        <div class="toast-content">
+            <span class="toast-message">Thành công!</span>
+        </div>
+    </div>
+
+    <!-- Help Button -->
+    <button class="floating-help-btn" onclick="document.getElementById('helpModal').classList.add('active')"
+        title="Hướng dẫn">
+        <i class="fas fa-question"></i>
+    </button>
+
+    <!-- Help Modal -->
+    <div class="modal magical-modal" id="helpModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2>
+                    <i class="fas fa-question-circle"></i>
+                    <span>Hướng Dẫn</span>
+                </h2>
+                <button class="close-btn" onclick="document.getElementById('helpModal').classList.remove('active')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="help-content">
+                <div class="help-section">
+                    <h3><i class="fas fa-camera"></i> Chụp Ảnh</h3>
+                    <ul>
+                        <li>Nhấn "Chụp Ảnh" để chụp 1 ảnh</li>
+                        <li>Chọn số ảnh và nhấn "Chụp Liên Tiếp" để chụp tự động</li>
+                        <li>Đếm ngược 3-2-1 trước khi chụp</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3><i class="fas fa-video"></i> Quay Video</h3>
+                    <ul>
+                        <li>Nhấn "Quay Video" để bắt đầu quay</li>
+                        <li>Nhấn lại để dừng quay</li>
+                        <li>Video sẽ được lưu tự động</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3><i class="fas fa-edit"></i> Chỉnh Sửa</h3>
+                    <ul>
+                        <li>Nhấn vào ảnh để chỉnh sửa</li>
+                        <li>Thêm sticker, áp dụng filter</li>
+                        <li>Điều chỉnh màu sắc và thay nền</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
