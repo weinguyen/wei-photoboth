@@ -35,74 +35,113 @@ class SparklePhotoBooth {
         };
         this.currentView = 'grid';
 
-        // Sticker emojis
+        // Enhanced sticker emojis with more variety
         this.availableStickers = [
-            '😀', '😂', '😍', '🥰', '😎', '🤩', '🥳', '😇',
-            '🔥', '⭐', '💫', '✨', '💖', '💕', '💯', '👑',
-            '🎉', '🎊', '🌈', '🦄', '🌟', '💎', '🎈', '🎀',
-            '🌺', '🌸', '🌼', '🌻', '🍀', '🦋', '🐱', '🐶',
-            '❤️', '💜', '💙', '💚', '💛', '🧡', '🖤', '🤍'
+            '😀', '😂', '😍', '🥰', '😎', '🤩', '🥳', '😇', '🤗', '😘',
+            '🔥', '⭐', '💫', '✨', '💖', '💕', '💯', '👑', '🎭', '🎪',
+            '🎉', '🎊', '🌈', '🦄', '🌟', '💎', '🎈', '🎀', '🎂', '🍭',
+            '🌺', '🌸', '🌼', '🌻', '🍀', '🦋', '🐱', '🐶', '🐰', '🐼',
+            '❤️', '💜', '💙', '💚', '💛', '🧡', '🖤', '🤍', '💗', '💝'
         ];
 
         this.init();
     }
 
     async init() {
-        this.createReducedSparkles();
-        this.createReducedFloatingHearts();
+        this.createEnhancedSparkles();
+        this.createEnhancedFloatingHearts();
         this.bindEvents();
         await this.initCamera();
         this.renderGallery();
         this.startBackgroundAnimations();
+        this.createFloatingSparkles();
     }
 
-    createReducedSparkles() {
+    // Enhanced sparkle creation with more variety and pink theme
+    createEnhancedSparkles() {
         const sparklesContainer = document.getElementById('sparkles');
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 30; i++) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
-            sparkle.style.width = Math.random() * 4 + 2 + 'px';
-            sparkle.style.height = sparkle.style.width;
+
+            // Varied sizes for more dynamic effect
+            const size = Math.random() * 6 + 3;
+            sparkle.style.width = size + 'px';
+            sparkle.style.height = size + 'px';
             sparkle.style.left = Math.random() * 100 + '%';
             sparkle.style.animationDelay = Math.random() * 6 + 's';
             sparkle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+
+            // Add variety in sparkle colors
+            if (Math.random() > 0.7) {
+                sparkle.style.background = 'radial-gradient(circle, #ff6b9d 0%, rgba(255, 107, 157, 0.8) 30%, transparent 70%)';
+                sparkle.style.boxShadow = '0 0 15px #ff6b9d, 0 0 25px rgba(255, 107, 157, 0.5)';
+            } else if (Math.random() > 0.5) {
+                sparkle.style.background = 'radial-gradient(circle, #ffd700 0%, rgba(255, 215, 0, 0.8) 30%, transparent 70%)';
+                sparkle.style.boxShadow = '0 0 12px #ffd700, 0 0 20px rgba(255, 215, 0, 0.4)';
+            }
+
             sparklesContainer.appendChild(sparkle);
         }
     }
 
-    createReducedFloatingHearts() {
+    createEnhancedFloatingHearts() {
         const heartsContainer = document.querySelector('.floating-hearts');
-        for (let i = 0; i < 5; i++) {
+        const heartTypes = ['💖', '💕', '💗', '💝', '💘', '💓', '💞', '💌'];
+
+        for (let i = 0; i < 8; i++) {
             const heart = document.createElement('div');
             heart.className = 'floating-heart';
-            heart.textContent = '💖';
+            heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.animationDelay = Math.random() * 8 + 's';
-            heart.style.animationDuration = (Math.random() * 4 + 8) + 's';
+            heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 16) + 'px';
             heartsContainer.appendChild(heart);
         }
     }
 
     startBackgroundAnimations() {
+        // More frequent sparkle creation
         setInterval(() => {
             this.createDynamicSparkle();
-        }, 500);
+        }, 300);
 
+        // Heart creation
         setInterval(() => {
             this.createDynamicHeart();
-        }, 6000);
+        }, 4000);
+
+        // Additional floating sparkles
+        setInterval(() => {
+            this.createFloatingSparkle();
+        }, 800);
     }
 
     createDynamicSparkle() {
         const sparklesContainer = document.getElementById('sparkles');
-        if (sparklesContainer.children.length > 15) return;
+        if (sparklesContainer.children.length > 25) return;
 
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
-        sparkle.style.width = Math.random() * 4 + 2 + 'px';
-        sparkle.style.height = sparkle.style.width;
+
+        const size = Math.random() * 5 + 2;
+        sparkle.style.width = size + 'px';
+        sparkle.style.height = size + 'px';
         sparkle.style.left = Math.random() * 100 + '%';
-        sparkle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+        sparkle.style.animationDuration = (Math.random() * 4 + 5) + 's';
+
+        // Random pink theme colors
+        const colors = [
+            'radial-gradient(circle, #ff6b9d 0%, rgba(255, 107, 157, 0.8) 30%, transparent 70%)',
+            'radial-gradient(circle, #ffd700 0%, rgba(255, 215, 0, 0.8) 30%, transparent 70%)',
+            'radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.9) 30%, transparent 70%)',
+            'radial-gradient(circle, #ffa8cc 0%, rgba(255, 168, 204, 0.8) 30%, transparent 70%)'
+        ];
+
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        sparkle.style.background = randomColor;
+
         sparklesContainer.appendChild(sparkle);
 
         setTimeout(() => {
@@ -114,20 +153,46 @@ class SparklePhotoBooth {
 
     createDynamicHeart() {
         const heartsContainer = document.querySelector('.floating-hearts');
-        if (heartsContainer.children.length > 8) return;
+        if (heartsContainer.children.length > 12) return;
 
         const heart = document.createElement('div');
         heart.className = 'floating-heart';
-        heart.textContent = Math.random() > 0.5 ? '💖' : '💕';
+
+        const heartTypes = ['💖', '💕', '💗', '💝', '💘', '💓', '💞', '💌', '🌸', '🌺'];
+        heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDuration = (Math.random() * 4 + 8) + 's';
+        heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
+        heart.style.fontSize = (Math.random() * 12 + 18) + 'px';
+
         heartsContainer.appendChild(heart);
 
         setTimeout(() => {
             if (heart.parentNode) {
                 heart.parentNode.removeChild(heart);
             }
-        }, 8000);
+        }, 10000);
+    }
+
+    createFloatingSparkle() {
+        const sparklesContainer = document.getElementById('sparkles');
+        if (sparklesContainer.children.length > 35) return;
+
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.width = '4px';
+        sparkle.style.height = '4px';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.animationDuration = '4s';
+        sparkle.style.background = 'radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%)';
+        sparkle.style.boxShadow = '0 0 8px #ffffff, 0 0 16px rgba(255, 107, 157, 0.3)';
+
+        sparklesContainer.appendChild(sparkle);
+
+        setTimeout(() => {
+            if (sparkle.parentNode) {
+                sparkle.parentNode.removeChild(sparkle);
+            }
+        }, 4000);
     }
 
     bindEvents() {
@@ -195,20 +260,24 @@ class SparklePhotoBooth {
         // Filters - Fixed event binding
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const filter = e.target.closest('.filter-btn').dataset.filter;
+                e.preventDefault();
+                e.stopPropagation();
+                const filter = e.currentTarget.dataset.filter;
                 if (filter) {
+                    console.log('Filter button clicked:', filter);
                     this.applyFilter(filter);
                 }
             });
         });
 
-        // Backgrounds - Fixed event binding with proper delegation
+        // FIXED: Background buttons - Proper event delegation and binding
         document.querySelectorAll('.bg-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const bg = e.target.closest('.bg-btn').dataset.bg;
+                e.stopPropagation();
+                const bg = e.currentTarget.dataset.bg;
                 if (bg) {
-                    console.log('Background button clicked:', bg); // Debug log
+                    console.log('Background button clicked:', bg);
                     this.applyBackground(bg);
                 }
             });
@@ -270,7 +339,7 @@ class SparklePhotoBooth {
 
         this.currentFacingMode = this.currentFacingMode === 'user' ? 'environment' : 'user';
         await this.initCamera();
-        this.showToast(`Đã chuyển sang camera ${this.currentFacingMode === 'user' ? 'trước' : 'sau'}!`);
+        this.showToast(`Đã chuyển sang camera ${this.currentFacingMode === 'user' ? 'trước' : 'sau'}! 📱`);
     }
 
     toggleEffects() {
@@ -286,6 +355,8 @@ class SparklePhotoBooth {
             btn.classList.remove('active');
         });
         document.querySelector(`[data-effect="${effect}"]`).classList.add('active');
+
+        this.showToast(`Đã áp dụng hiệu ứng ${effect}! ✨`);
     }
 
     // Auto Capture Functions
@@ -314,10 +385,10 @@ class SparklePhotoBooth {
             if (this.autoCapture.currentShot < this.autoCapture.totalShots) {
                 setTimeout(() => {
                     this.captureNextPhoto();
-                }, 2000);
+                }, 2500); // Slightly longer delay for better UX
             } else {
                 this.stopAutoCapture();
-                this.showToast(`Đã chụp xong ${this.autoCapture.totalShots} ảnh! 📸`);
+                this.showToast(`🎉 Đã chụp xong ${this.autoCapture.totalShots} ảnh tuyệt vời! 📸✨`);
             }
         });
     }
@@ -395,7 +466,7 @@ class SparklePhotoBooth {
             recordIndicator.classList.add('active');
             this.startRecordingTimer();
 
-            this.showToast('Bắt đầu quay video! 🎬');
+            this.showToast('🎬 Bắt đầu quay video thần thánh! ✨');
 
         } catch (error) {
             console.error('Error starting recording:', error);
@@ -423,7 +494,7 @@ class SparklePhotoBooth {
         recordIndicator.classList.remove('active');
         this.stopRecordingTimer();
 
-        this.showToast('Đã dừng quay video! 🎬');
+        this.showToast('🎬 Đã dừng quay video! Tác phẩm tuyệt vời! ✨');
     }
 
     startRecordingTimer() {
@@ -465,7 +536,7 @@ class SparklePhotoBooth {
         this.saveMedia();
         this.renderGallery();
 
-        this.showToast('Video đã được lưu! 🎥');
+        this.showToast('🎥 Video đã được lưu thành công! Siêu phẩm! ✨');
     }
 
     calculateRecordingDuration() {
@@ -487,9 +558,13 @@ class SparklePhotoBooth {
         const flash = document.getElementById('captureFlash');
 
         try {
+            // Enhanced countdown with more sparkles
             for (let i = 3; i > 0; i--) {
                 countdown.textContent = i;
                 countdown.classList.add('show');
+
+                // Create extra sparkles during countdown
+                this.createCountdownSparkles();
 
                 await this.sleep(1000);
                 countdown.classList.remove('show');
@@ -508,6 +583,28 @@ class SparklePhotoBooth {
             this.showToast('Lỗi khi chụp ảnh!', 'error');
         } finally {
             this.isCapturing = false;
+        }
+    }
+
+    createCountdownSparkles() {
+        const sparklesContainer = document.getElementById('sparkles');
+        for (let i = 0; i < 5; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.width = '6px';
+            sparkle.style.height = '6px';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.animationDuration = '2s';
+            sparkle.style.background = 'radial-gradient(circle, #ffd700 0%, rgba(255, 215, 0, 0.8) 50%, transparent 100%)';
+            sparkle.style.boxShadow = '0 0 15px #ffd700';
+
+            sparklesContainer.appendChild(sparkle);
+
+            setTimeout(() => {
+                if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                }
+            }, 2000);
         }
     }
 
@@ -562,7 +659,7 @@ class SparklePhotoBooth {
                 <div class="preview-frame">
                     <img class="preview-image" alt="Ảnh vừa chụp">
                 </div>
-                <div class="preview-text">✨ Tuyệt vời! Ảnh thật đẹp! ✨</div>
+                <div class="preview-text">✨ Tuyệt vời! Ảnh thật là đẹp! 🌸💖</div>
             </div>
         `;
         document.body.appendChild(modal);
@@ -592,13 +689,13 @@ class SparklePhotoBooth {
         const cameraRect = document.querySelector('.camera-frame').getBoundingClientRect();
         const galleryRect = document.querySelector('.gallery-grid').getBoundingClientRect();
 
-        flyingPhoto.style.left = cameraRect.left + cameraRect.width / 2 - 60 + 'px';
-        flyingPhoto.style.top = cameraRect.top + cameraRect.height / 2 - 40 + 'px';
+        flyingPhoto.style.left = cameraRect.left + cameraRect.width / 2 - 70 + 'px';
+        flyingPhoto.style.top = cameraRect.top + cameraRect.height / 2 - 45 + 'px';
 
         flyingContainer.appendChild(flyingPhoto);
 
         setTimeout(() => {
-            const targetX = galleryRect.left + Math.random() * (galleryRect.width - 120);
+            const targetX = galleryRect.left + Math.random() * (galleryRect.width - 140);
             const targetY = galleryRect.top + Math.random() * 100;
 
             flyingPhoto.style.left = targetX + 'px';
@@ -609,7 +706,7 @@ class SparklePhotoBooth {
             if (flyingPhoto.parentNode) {
                 flyingPhoto.parentNode.removeChild(flyingPhoto);
             }
-        }, 2000);
+        }, 2500);
     }
 
     getFilterString() {
@@ -644,7 +741,7 @@ class SparklePhotoBooth {
             galleryGrid.classList.add(`${view}-view`);
         }
 
-        this.showToast(`Đã chuyển sang chế độ xem ${view === 'grid' ? 'lưới' : view === 'list' ? 'danh sách' : 'gạch'}!`);
+        this.showToast(`✨ Đã chuyển sang chế độ xem ${view === 'grid' ? 'lưới' : view === 'list' ? 'danh sách' : 'gạch'}! 🎨`);
     }
 
     renderGallery() {
@@ -663,7 +760,7 @@ class SparklePhotoBooth {
                     <div class="empty-icon">
                         <i class="fas fa-camera"></i>
                     </div>
-                    <p>Chưa có ảnh hoặc video nào.<br>Hãy chụp ảnh hoặc quay video đầu tiên!</p>
+                    <p>Chưa có ảnh hoặc video nào.<br>Hãy chụp ảnh hoặc quay video đầu tiên! 🌸</p>
                     <div class="empty-arrow">👆</div>
                 </div>
             `;
@@ -677,8 +774,8 @@ class SparklePhotoBooth {
                 : `<img src="${item.data}" alt="Media item" loading="lazy">`;
 
             const typeIndicator = isVideo
-                ? `<div class="media-type-indicator">📹 VIDEO</div>`
-                : `<div class="media-type-indicator">📷 PHOTO</div>`;
+                ? `<div class="media-type-indicator">🎬 VIDEO</div>`
+                : `<div class="media-type-indicator">📸 PHOTO</div>`;
 
             const durationIndicator = isVideo && item.duration
                 ? `<div class="video-duration">${this.formatDuration(item.duration)}</div>`
@@ -751,7 +848,7 @@ class SparklePhotoBooth {
         link.download = `sparkle-video-${this.currentVideoForDownload.id}.webm`;
         link.href = this.currentVideoForDownload.data;
         link.click();
-        this.showToast('Đã tải xuống video! 📥');
+        this.showToast('📥 Đã tải xuống video! Chia sẻ ngay nào! ✨');
     }
 
     downloadMedia(id) {
@@ -763,7 +860,7 @@ class SparklePhotoBooth {
         link.download = `sparkle-${media.type}-${id}.${extension}`;
         link.href = media.data;
         link.click();
-        this.showToast(`Đã tải xuống ${media.type === 'video' ? 'video' : 'ảnh'}! 📥`);
+        this.showToast(`📥 Đã tải xuống ${media.type === 'video' ? 'video' : 'ảnh'}! Tuyệt vời! ✨`);
     }
 
     deleteMedia(id) {
@@ -778,12 +875,12 @@ class SparklePhotoBooth {
             this.media = this.media.filter(m => m.id !== id);
             this.saveMedia();
             this.renderGallery();
-            this.showToast(`Đã xóa ${mediaType}! 🗑️`);
+            this.showToast(`🗑️ Đã xóa ${mediaType}! Dọn dẹp xong! ✨`);
         }
     }
 
     clearGallery() {
-        if (confirm('Bạn có chắc muốn xóa tất cả ảnh và video? 🗑️')) {
+        if (confirm('Bạn có chắc muốn xóa tất cả ảnh và video? 🗑️💔')) {
             this.media.forEach(media => {
                 if (media.type === 'video' && media.data.startsWith('blob:')) {
                     URL.revokeObjectURL(media.data);
@@ -793,11 +890,11 @@ class SparklePhotoBooth {
             this.media = [];
             this.saveMedia();
             this.renderGallery();
-            this.showToast('Đã xóa tất cả! 🗑️');
+            this.showToast('🗑️ Đã xóa tất cả! Bắt đầu lại thôi! ✨');
         }
     }
 
-    // Editor Functions - FIXED BACKGROUND FUNCTIONALITY
+    // FIXED: Editor Functions with Enhanced Background Functionality
     editPhoto(id) {
         this.currentPhoto = this.media.find(m => m.id === id);
         if (!this.currentPhoto || this.currentPhoto.type !== 'photo') return;
@@ -961,7 +1058,7 @@ class SparklePhotoBooth {
         this.stickers.push(sticker);
         this.selectedSticker = sticker;
         this.redrawCanvas();
-        this.showToast(`Đã thêm sticker ${emoji}!`);
+        this.showToast(`✨ Đã thêm sticker ${emoji}! Quá đáng yêu! 💖`);
     }
 
     selectStickerAt(x, y) {
@@ -988,7 +1085,7 @@ class SparklePhotoBooth {
             this.stickers.splice(index, 1);
             this.selectedSticker = null;
             this.redrawCanvas();
-            this.showToast('Đã xóa sticker!');
+            this.showToast('🗑️ Đã xóa sticker!');
         }
     }
 
@@ -1000,7 +1097,7 @@ class SparklePhotoBooth {
             // Clear canvas
             this.editorCtx.clearRect(0, 0, this.editorCanvas.width, this.editorCanvas.height);
 
-            // Apply background FIRST
+            // FIXED: Apply background FIRST
             this.applyBackgroundToCanvas();
 
             // Apply filters and draw image
@@ -1025,11 +1122,15 @@ class SparklePhotoBooth {
             this.editorCtx.textBaseline = 'middle';
 
             if (sticker === this.selectedSticker) {
-                this.editorCtx.strokeStyle = 'rgba(102, 126, 234, 0.8)';
-                this.editorCtx.lineWidth = 3;
+                this.editorCtx.strokeStyle = '#ff6b9d';
+                this.editorCtx.lineWidth = 4;
                 this.editorCtx.beginPath();
-                this.editorCtx.arc(0, 0, sticker.size / 2 + 10, 0, Math.PI * 2);
+                this.editorCtx.arc(0, 0, sticker.size / 2 + 12, 0, Math.PI * 2);
                 this.editorCtx.stroke();
+
+                // Add glow effect
+                this.editorCtx.shadowColor = '#ff6b9d';
+                this.editorCtx.shadowBlur = 10;
             }
 
             this.editorCtx.fillText(sticker.emoji, 0, 0);
@@ -1059,7 +1160,7 @@ class SparklePhotoBooth {
         this.selectedSticker = null;
         this.updateActiveButtons();
         this.loadPhotoToEditor();
-        this.showToast('Đã reset tất cả!');
+        this.showToast('🔄 Đã reset tất cả! Bắt đầu lại nào! ✨');
     }
 
     resetFilters() {
@@ -1078,20 +1179,20 @@ class SparklePhotoBooth {
     }
 
     applyFilter(filter) {
-        console.log('Applying filter:', filter); // Debug log
+        console.log('Applying filter:', filter);
         this.currentFilter = filter;
         this.updateActiveButtons();
         this.applyCurrentSettings();
-        this.showToast(`Đã áp dụng filter ${filter}!`);
+        this.showToast(`✨ Đã áp dụng filter ${filter}! Tuyệt đẹp! 🌸`);
     }
 
-    // FIXED BACKGROUND APPLICATION
+    // FIXED: Enhanced Background Application
     applyBackground(bg) {
-        console.log('Applying background:', bg); // Debug log
+        console.log('Applying background:', bg);
         this.currentBackground = bg;
         this.updateActiveButtons();
         this.applyCurrentSettings();
-        this.showToast(`Đã áp dụng nền ${bg}!`);
+        this.showToast(`🎨 Đã áp dụng nền ${bg}! Màu sắc tuyệt vời! ✨`);
     }
 
     updateActiveButtons() {
@@ -1119,14 +1220,14 @@ class SparklePhotoBooth {
         this.redrawCanvas();
     }
 
-    // FIXED BACKGROUND DRAWING
+    // FIXED: Enhanced Background Drawing with Better Performance
     applyBackgroundToCanvas() {
         if (this.currentBackground === 'none') return;
 
         const canvas = this.editorCanvas;
         const ctx = this.editorCtx;
 
-        console.log('Drawing background:', this.currentBackground); // Debug log
+        console.log('Drawing background:', this.currentBackground);
 
         switch (this.currentBackground) {
             case 'galaxy':
@@ -1152,6 +1253,7 @@ class SparklePhotoBooth {
         }
     }
 
+    // Enhanced background drawing methods with pink theme integration
     drawGalaxyBackground() {
         const ctx = this.editorCtx;
         const canvas = this.editorCanvas;
@@ -1160,22 +1262,25 @@ class SparklePhotoBooth {
             canvas.width / 2, canvas.height / 2, 0,
             canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
         );
-        gradient.addColorStop(0, '#1a0033');
-        gradient.addColorStop(0.3, '#330066');
-        gradient.addColorStop(0.6, '#4d0099');
+        gradient.addColorStop(0, '#2d1b69');
+        gradient.addColorStop(0.3, '#8e44ad');
+        gradient.addColorStop(0.6, '#ff6b9d');
         gradient.addColorStop(1, '#0c0c0c');
 
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Add stars
-        for (let i = 0; i < 100; i++) {
+        // Add pink-themed stars
+        for (let i = 0; i < 150; i++) {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
-            const radius = Math.random() * 1.5 + 0.5;
-            const alpha = Math.random() * 0.8 + 0.2;
+            const radius = Math.random() * 2 + 0.5;
+            const alpha = Math.random() * 0.9 + 0.1;
 
-            ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+            const colors = ['rgba(255, 255, 255, ', 'rgba(255, 107, 157, ', 'rgba(255, 215, 0, '];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            ctx.fillStyle = color + alpha + ')';
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
@@ -1189,12 +1294,12 @@ class SparklePhotoBooth {
         ctx.fillStyle = '#001122';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const colors = ['#00ff41', '#0066ff', '#ff00ff', '#ffff00'];
-        for (let i = 0; i < 4; i++) {
+        const colors = ['#ff6b9d', '#00ff41', '#0066ff', '#ffd700', '#ff91c7'];
+        for (let i = 0; i < 5; i++) {
             const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, colors[i] + '00');
-            gradient.addColorStop(0.3, colors[i] + '60');
-            gradient.addColorStop(0.7, colors[i] + '30');
+            gradient.addColorStop(0.3, colors[i] + '80');
+            gradient.addColorStop(0.7, colors[i] + '40');
             gradient.addColorStop(1, colors[i] + '00');
 
             ctx.fillStyle = gradient;
@@ -1202,7 +1307,7 @@ class SparklePhotoBooth {
 
             const waveHeight = canvas.height * 0.6;
             const frequency = 0.01;
-            const amplitude = 40;
+            const amplitude = 50;
 
             ctx.moveTo(0, waveHeight + Math.sin(i * 2) * amplitude);
             for (let x = 0; x <= canvas.width; x += 10) {
@@ -1221,12 +1326,26 @@ class SparklePhotoBooth {
         const canvas = this.editorCanvas;
 
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient.addColorStop(0, '#ff6b35');
-        gradient.addColorStop(0.3, '#f7931e');
-        gradient.addColorStop(0.6, '#ffd23f');
+        gradient.addColorStop(0, '#ff6b9d');
+        gradient.addColorStop(0.2, '#ff91c7');
+        gradient.addColorStop(0.4, '#ffd700');
+        gradient.addColorStop(0.6, '#ff7979');
+        gradient.addColorStop(0.8, '#ff6348');
         gradient.addColorStop(1, '#ff8e8e');
 
         ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Add sun
+        const sunGradient = ctx.createRadialGradient(
+            canvas.width * 0.7, canvas.height * 0.3, 0,
+            canvas.width * 0.7, canvas.height * 0.3, 80
+        );
+        sunGradient.addColorStop(0, '#ffd700');
+        sunGradient.addColorStop(0.7, '#ff6b35');
+        sunGradient.addColorStop(1, 'transparent');
+
+        ctx.fillStyle = sunGradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
@@ -1236,11 +1355,35 @@ class SparklePhotoBooth {
 
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         gradient.addColorStop(0, '#87CEEB');
-        gradient.addColorStop(0.5, '#4fc3f7');
+        gradient.addColorStop(0.3, '#4fc3f7');
+        gradient.addColorStop(0.6, '#29b6f6');
         gradient.addColorStop(1, '#0077be');
 
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Add waves with pink highlights
+        for (let i = 0; i < 3; i++) {
+            const waveGradient = ctx.createLinearGradient(0, canvas.height * 0.7, 0, canvas.height);
+            waveGradient.addColorStop(0, 'rgba(255, 107, 157, 0.3)');
+            waveGradient.addColorStop(1, 'rgba(255, 107, 157, 0.1)');
+
+            ctx.fillStyle = waveGradient;
+            ctx.beginPath();
+
+            const waveY = canvas.height * (0.7 + i * 0.1);
+            ctx.moveTo(0, waveY);
+
+            for (let x = 0; x <= canvas.width; x += 20) {
+                const y = waveY + Math.sin((x + i * 50) * 0.02) * 15;
+                ctx.lineTo(x, y);
+            }
+
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.closePath();
+            ctx.fill();
+        }
     }
 
     drawForestBackground() {
@@ -1249,11 +1392,29 @@ class SparklePhotoBooth {
 
         const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         gradient.addColorStop(0, '#a5d6a7');
-        gradient.addColorStop(0.5, '#66bb6a');
+        gradient.addColorStop(0.3, '#81c784');
+        gradient.addColorStop(0.6, '#66bb6a');
         gradient.addColorStop(1, '#2e7d32');
 
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Add pink cherry blossoms
+        for (let i = 0; i < 20; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height * 0.7;
+            const size = Math.random() * 8 + 4;
+
+            ctx.fillStyle = 'rgba(255, 182, 193, 0.8)';
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(255, 107, 157, 0.6)';
+            ctx.beginPath();
+            ctx.arc(x + 2, y + 2, size * 0.6, 0, Math.PI * 2);
+            ctx.fill();
+        }
     }
 
     buildFilterString() {
@@ -1296,22 +1457,24 @@ class SparklePhotoBooth {
         return filterString.trim() || 'none';
     }
 
-    // FIXED CUSTOM BACKGROUND LOADING
+    // FIXED: Enhanced Custom Background Loading
     loadCustomBackground(event) {
         const file = event.target.files[0];
         if (!file) return;
 
         // Validate file type
         if (!file.type.startsWith('image/')) {
-            this.showToast('Vui lòng chọn file ảnh!', 'error');
+            this.showToast('🚫 Vui lòng chọn file ảnh!', 'error');
             return;
         }
 
         // Validate file size (max 5MB)
         if (file.size > 5 * 1024 * 1024) {
-            this.showToast('File quá lớn! Vui lòng chọn ảnh dưới 5MB.', 'error');
+            this.showToast('⚠️ File quá lớn! Vui lòng chọn ảnh dưới 5MB.', 'error');
             return;
         }
+
+        this.showLoading();
 
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -1321,15 +1484,18 @@ class SparklePhotoBooth {
                 this.currentBackground = 'custom';
                 this.updateActiveButtons();
                 this.applyCurrentSettings();
-                this.showToast('Đã tải nền tùy chỉnh!');
+                this.hideLoading();
+                this.showToast('🎨 Đã tải nền tùy chỉnh thành công! Tuyệt đẹp! ✨');
             };
             img.onerror = () => {
-                this.showToast('Lỗi khi tải ảnh!', 'error');
+                this.hideLoading();
+                this.showToast('❌ Lỗi khi tải ảnh!', 'error');
             };
             img.src = e.target.result;
         };
         reader.onerror = () => {
-            this.showToast('Lỗi khi đọc file!', 'error');
+            this.hideLoading();
+            this.showToast('❌ Lỗi khi đọc file!', 'error');
         };
         reader.readAsDataURL(file);
     }
@@ -1337,7 +1503,12 @@ class SparklePhotoBooth {
     async saveEdit() {
         this.showLoading();
 
-        await this.sleep(500);
+        // Add some sparkles during save
+        for (let i = 0; i < 10; i++) {
+            this.createSaveSparkles();
+        }
+
+        await this.sleep(800);
 
         const editedImageData = this.editorCanvas.toDataURL('image/jpeg', 0.9);
 
@@ -1348,7 +1519,27 @@ class SparklePhotoBooth {
         this.renderGallery();
         this.closeEditor();
         this.hideLoading();
-        this.showToast('Đã lưu ảnh thành công! ✨');
+        this.showToast('💾 Đã lưu ảnh thành công! Siêu phẩm đã ra đời! ✨🌸');
+    }
+
+    createSaveSparkles() {
+        const sparklesContainer = document.getElementById('sparkles');
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.width = '8px';
+        sparkle.style.height = '8px';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.animationDuration = '1s';
+        sparkle.style.background = 'radial-gradient(circle, #ffd700 0%, rgba(255, 215, 0, 0.8) 50%, transparent 100%)';
+        sparkle.style.boxShadow = '0 0 20px #ffd700, 0 0 30px rgba(255, 107, 157, 0.5)';
+
+        sparklesContainer.appendChild(sparkle);
+
+        setTimeout(() => {
+            if (sparkle.parentNode) {
+                sparkle.parentNode.removeChild(sparkle);
+            }
+        }, 1000);
     }
 
     downloadEdit() {
@@ -1356,7 +1547,7 @@ class SparklePhotoBooth {
         link.download = `sparkle-photo-edited-${Date.now()}.jpg`;
         link.href = this.editorCanvas.toDataURL('image/jpeg', 0.9);
         link.click();
-        this.showToast('Đã tải xuống ảnh! 📥');
+        this.showToast('📥 Đã tải xuống ảnh chỉnh sửa! Chia sẻ ngay nào! ✨');
     }
 
     saveMedia() {
@@ -1375,7 +1566,7 @@ class SparklePhotoBooth {
             localStorage.setItem('photobooth-media', JSON.stringify(mediaToSave));
         } catch (error) {
             console.error('Error saving media:', error);
-            this.showToast('Lỗi khi lưu! Có thể bộ nhớ đã đầy.', 'error');
+            this.showToast('⚠️ Lỗi khi lưu! Có thể bộ nhớ đã đầy.', 'error');
         }
     }
 
@@ -1408,15 +1599,47 @@ class SparklePhotoBooth {
                 toast.style.background = 'linear-gradient(135deg, #e17055 0%, #d63031 100%)';
             } else {
                 iconEl.className = 'fas fa-magic';
-                toast.style.background = 'linear-gradient(135deg, #00b894 0%, #00a085 100%)';
+                toast.style.background = 'linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%)';
             }
         }
 
         toast.classList.add('active');
 
+        // Create toast sparkles
+        this.createToastSparkles();
+
         setTimeout(() => {
             toast.classList.remove('active');
         }, 4000);
+    }
+
+    createToastSparkles() {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+
+        for (let i = 0; i < 3; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.style.cssText = `
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: radial-gradient(circle, #ffd700 0%, transparent 70%);
+                border-radius: 50%;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+                animation: sparkleFloat 2s ease-out forwards;
+                pointer-events: none;
+                z-index: 10;
+            `;
+
+            toast.appendChild(sparkle);
+
+            setTimeout(() => {
+                if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                }
+            }, 2000);
+        }
     }
 
     sleep(ms) {
@@ -1448,6 +1671,13 @@ class SparklePhotoBooth {
 let photoBooth;
 document.addEventListener('DOMContentLoaded', () => {
     photoBooth = new SparklePhotoBooth();
+
+    // Add welcome message with pink theme
+    setTimeout(() => {
+        if (photoBooth) {
+            photoBooth.showToast('🌸 Chào mừng đến với Wei PhotoBooth! Sẵn sàng tạo những khoảnh khắc tuyệt vời! ✨💖');
+        }
+    }, 1000);
 });
 
 // Handle page visibility for camera optimization
@@ -1492,12 +1722,15 @@ document.addEventListener('touchend', function (event) {
     lastTouchEnd = now;
 }, false);
 
-// Service Worker for offline support
+// Enhanced Service Worker for offline support
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
             .then((registration) => {
                 console.log('SW registered: ', registration);
+                if (photoBooth) {
+                    photoBooth.showToast('📱 App đã sẵn sàng offline! Tuyệt vời! ✨');
+                }
             })
             .catch((registrationError) => {
                 console.log('SW registration failed: ', registrationError);
@@ -1505,7 +1738,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// PWA Install prompt
+// Enhanced PWA Install prompt with pink theme
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -1526,20 +1759,22 @@ function showInstallPromotion() {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
         `;
 
         installBtn.addEventListener('click', async () => {
@@ -1549,25 +1784,33 @@ function showInstallPromotion() {
                 console.log(`User response to the install prompt: ${outcome}`);
                 deferredPrompt = null;
                 installBtn.remove();
+
+                if (photoBooth && outcome === 'accepted') {
+                    photoBooth.showToast('🎉 Cảm ơn bạn đã cài đặt app! Tuyệt vời! ✨');
+                }
             }
         });
 
         installBtn.addEventListener('mouseenter', () => {
-            installBtn.style.transform = 'translateY(-2px) scale(1.05)';
+            installBtn.style.transform = 'translateY(-3px) scale(1.05)';
+            installBtn.style.boxShadow = '0 8px 25px rgba(255, 107, 157, 0.6)';
         });
 
         installBtn.addEventListener('mouseleave', () => {
             installBtn.style.transform = 'translateY(0) scale(1)';
+            installBtn.style.boxShadow = '0 6px 20px rgba(255, 107, 157, 0.4)';
         });
 
         document.body.appendChild(installBtn);
 
+        // Auto hide after 10 seconds
         setTimeout(() => {
             if (installBtn.parentNode) {
                 installBtn.style.opacity = '0';
+                installBtn.style.transform = 'translateY(-50px)';
                 setTimeout(() => installBtn.remove(), 300);
             }
-        }, 8000);
+        }, 10000);
     }
 }
 
@@ -1584,7 +1827,7 @@ if ('performance' in window) {
     });
 }
 
-// Memory management for mobile devices
+// Enhanced memory management for mobile devices
 if ('memory' in performance) {
     setInterval(() => {
         const memInfo = performance.memory;
@@ -1593,15 +1836,77 @@ if ('memory' in performance) {
         if (usedMemory > 50 && photoBooth) {
             console.warn('High memory usage detected:', usedMemory.toFixed(2), 'MB');
 
+            // More aggressive cleanup for videos
             photoBooth.media.forEach((media, index) => {
                 if (media.type === 'video' && media.data && media.data.startsWith('blob:')) {
                     const videoIndex = photoBooth.media.filter(m => m.type === 'video').indexOf(media);
-                    if (videoIndex > 4) {
+                    if (videoIndex > 3) { // Keep only 3 most recent videos
                         URL.revokeObjectURL(media.data);
                         media.data = null;
                     }
                 }
             });
+
+            // Clean up sparkles
+            const sparklesContainer = document.getElementById('sparkles');
+            if (sparklesContainer && sparklesContainer.children.length > 20) {
+                while (sparklesContainer.children.length > 15) {
+                    sparklesContainer.removeChild(sparklesContainer.firstChild);
+                }
+            }
         }
-    }, 30000);
+    }, 20000); // Check every 20 seconds
+}
+
+// Add keyboard shortcuts info
+document.addEventListener('keydown', (e) => {
+    if (e.key === '?' && e.shiftKey) {
+        e.preventDefault();
+        if (photoBooth) {
+            photoBooth.showToast('⌨️ Phím tắt: Space=Chụp ảnh, Ctrl+R=Quay video, Esc=Đóng, ?=Trợ giúp ✨');
+        }
+    }
+});
+
+// Add touch feedback for mobile
+document.addEventListener('touchstart', (e) => {
+    if (e.target.classList.contains('btn') ||
+        e.target.classList.contains('glass-btn') ||
+        e.target.closest('.btn') ||
+        e.target.closest('.glass-btn')) {
+        e.target.style.transform = 'scale(0.95)';
+    }
+});
+
+document.addEventListener('touchend', (e) => {
+    if (e.target.classList.contains('btn') ||
+        e.target.classList.contains('glass-btn') ||
+        e.target.closest('.btn') ||
+        e.target.closest('.glass-btn')) {
+        setTimeout(() => {
+            e.target.style.transform = '';
+        }, 150);
+    }
+});
+
+// Enhanced error handling
+window.addEventListener('error', (e) => {
+    console.error('Global error:', e.error);
+    if (photoBooth) {
+        photoBooth.showToast('⚠️ Đã xảy ra lỗi! Vui lòng thử lại.', 'error');
+    }
+});
+
+window.addEventListener('unhandledrejection', (e) => {
+    console.error('Unhandled promise rejection:', e.reason);
+    if (photoBooth) {
+        photoBooth.showToast('⚠️ Lỗi xử lý! Vui lòng thử lại.', 'error');
+    }
+});
+
+// Add analytics placeholder
+if (typeof gtag !== 'undefined') {
+    gtag('event', 'photobooth_loaded', {
+        'custom_parameter': 'pink_theme_version'
+    });
 }

@@ -4,31 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>✨ Wei PhotoBooth Pro ✨</title>
+    <title>✨ Wei PhotoBooth Pro - Pink Edition ✨</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#667eea">
+    <!-- PWA Meta Tags with Pink Theme -->
+    <meta name="theme-color" content="#ff6b9d">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Wei PhotoBooth">
+    <meta name="apple-mobile-web-app-title" content="Wei PhotoBooth Pro">
     <link rel="manifest" href="manifest.json">
+
+    <!-- Enhanced Meta Tags -->
+    <meta name="description"
+        content="Wei PhotoBooth Pro - Ứng dụng chụp ảnh và quay video với hiệu ứng ma thuật, theme hồng sáng đẹp mắt">
+    <meta name="keywords" content="photobooth, camera, photo editor, pink theme, wei photobooth">
+    <meta name="author" content="Wei Nguyen">
+
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="Wei PhotoBooth Pro - Pink Edition">
+    <meta property="og:description" content="Chụp ảnh và quay video đẹp với hiệu ứng ma thuật!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/icon-512x512.png">
 
     <!-- Prevent zoom on inputs -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="script.js" as="script">
 </head>
 
 <body>
-    <!-- Magic Particles Background (Reduced) -->
+    <!-- Enhanced Magic Particles Background -->
     <div class="magic-bg">
         <div class="sparkles" id="sparkles"></div>
         <div class="floating-hearts"></div>
     </div>
 
-    <!-- Header with reduced effects -->
+    <!-- Enhanced Header with Pink Theme -->
     <header class="header">
         <div class="header-content">
             <h1 class="logo">
@@ -37,11 +53,11 @@
                 </span>
                 <span class="logo-text">
                     Wei PhotoBooth
-                    <span class="pro-badge">PRO</span>
+                    <span class="pro-badge">PINK</span>
                 </span>
             </h1>
             <p class="tagline">
-                <span class="tagline-text">Chụp ảnh & quay video đẹp với hiệu ứng ma thuật!</span>
+                <span class="tagline-text">🌸 Chụp ảnh & quay video đẹp với hiệu ứng ma thuật hồng rực rỡ! ✨</span>
             </p>
         </div>
     </header>
@@ -55,7 +71,7 @@
                     <video id="video" autoplay muted playsinline></video>
                     <canvas id="canvas" style="display: none;"></canvas>
 
-                    <!-- Camera Overlay -->
+                    <!-- Enhanced Camera Overlay -->
                     <div class="camera-overlay">
                         <div class="frame-effect">
                             <div class="corner corner-tl"></div>
@@ -140,7 +156,7 @@
             <!-- Effects Panel -->
             <div class="effects-panel glass-panel" id="effectsPanel">
                 <div class="panel-header">
-                    <h3><i class="fas fa-palette"></i> Hiệu Ứng</h3>
+                    <h3><i class="fas fa-palette"></i> Hiệu Ứng Ma Thuật</h3>
                 </div>
                 <div class="effects-grid">
                     <button class="effect-btn glass-btn active" data-effect="none">
@@ -176,7 +192,7 @@
             <div class="gallery-header">
                 <h2>
                     <i class="fas fa-images"></i>
-                    <span>Bộ Sưu Tập</span>
+                    <span>Bộ Sưu Tập Kỷ Niệm</span>
                 </h2>
                 <div class="gallery-controls">
                     <div class="view-controls">
@@ -206,7 +222,7 @@
                         <div class="empty-icon">
                             <i class="fas fa-camera"></i>
                         </div>
-                        <p>Chưa có ảnh hoặc video nào.<br>Hãy chụp ảnh hoặc quay video đầu tiên!</p>
+                        <p>Chưa có ảnh hoặc video nào.<br>Hãy chụp ảnh hoặc quay video đầu tiên! 🌸✨</p>
                         <div class="empty-arrow">👆</div>
                     </div>
                 </div>
@@ -224,7 +240,7 @@
             <div class="modal-header">
                 <h2>
                     <i class="fas fa-magic"></i>
-                    <span>Chỉnh Sửa Ảnh</span>
+                    <span>🎨 Chỉnh Sửa Ảnh Ma Thuật</span>
                 </h2>
                 <button class="close-btn" id="closeEditor">
                     <i class="fas fa-times"></i>
@@ -244,7 +260,7 @@
                     <!-- Filters Tab -->
                     <div class="tab-content" id="filtersTab">
                         <div class="section-header">
-                            <h3><i class="fas fa-filter"></i> Bộ Lọc</h3>
+                            <h3><i class="fas fa-filter"></i> Bộ Lọc Màu Sắc</h3>
                         </div>
                         <div class="filters-grid">
                             <button class="filter-btn glass-btn active" data-filter="none">
@@ -285,7 +301,7 @@
                     <!-- Adjustments -->
                     <div class="adjustments-section">
                         <div class="section-header">
-                            <h3><i class="fas fa-sliders-h"></i> Điều Chỉnh</h3>
+                            <h3><i class="fas fa-sliders-h"></i> Điều Chỉnh Màu Sắc</h3>
                         </div>
                         <div class="slider-group">
                             <label><i class="fas fa-sun"></i> Độ Sáng</label>
@@ -307,10 +323,10 @@
                         </div>
                     </div>
 
-                    <!-- Background Section -->
+                    <!-- FIXED: Background Section -->
                     <div class="background-section">
                         <div class="section-header">
-                            <h3><i class="fas fa-image"></i> Nền</h3>
+                            <h3><i class="fas fa-image"></i> 🌸 Nền Tuyệt Đẹp</h3>
                         </div>
                         <div class="background-grid">
                             <button class="bg-btn glass-btn active" data-bg="none">
@@ -335,14 +351,14 @@
                             </button>
                             <button class="bg-btn glass-btn" data-bg="forest">
                                 <div class="bg-preview forest"></div>
-                                <span>Rừng</span>
+                                <span>Rừng Hoa</span>
                             </button>
                         </div>
                         <div class="custom-bg-upload">
                             <input type="file" id="customBg" accept="image/*">
                             <label for="customBg" class="btn btn-secondary btn-sm">
                                 <i class="fas fa-upload"></i>
-                                <span>Tải Nền</span>
+                                <span>Tải Nền Riêng</span>
                             </label>
                         </div>
                     </div>
@@ -373,7 +389,7 @@
             <div class="modal-header">
                 <h2>
                     <i class="fas fa-video"></i>
-                    <span>Xem Video</span>
+                    <span>🎬 Xem Video Tuyệt Đẹp</span>
                 </h2>
                 <button class="close-btn" id="closeVideoModal">
                     <i class="fas fa-times"></i>
@@ -393,20 +409,20 @@
         </div>
     </div>
 
-    <!-- Loading Screen -->
+    <!-- Enhanced Loading Screen -->
     <div class="loading magical-loading" id="loading">
         <div class="loading-content">
             <div class="magic-spinner">
                 <div class="spinner-ring"></div>
                 <div class="spinner-ring"></div>
                 <div class="spinner-ring"></div>
-                <div class="spinner-center">✨</div>
+                <div class="spinner-center">🌸</div>
             </div>
-            <p class="loading-text">Đang xử lý...</p>
+            <p class="loading-text">Đang xử lý ma thuật...</p>
         </div>
     </div>
 
-    <!-- Toast -->
+    <!-- Enhanced Toast -->
     <div class="toast magical-toast" id="toast">
         <div class="toast-icon">
             <i class="fas fa-magic"></i>
@@ -422,14 +438,14 @@
         <i class="fas fa-question"></i>
     </button>
 
-    <!-- Help Modal -->
+    <!-- Enhanced Help Modal -->
     <div class="modal magical-modal" id="helpModal">
         <div class="modal-backdrop"></div>
         <div class="modal-content glass-card">
             <div class="modal-header">
                 <h2>
                     <i class="fas fa-question-circle"></i>
-                    <span>Hướng Dẫn</span>
+                    <span>💡 Hướng Dẫn Sử Dụng</span>
                 </h2>
                 <button class="close-btn" onclick="document.getElementById('helpModal').classList.remove('active')">
                     <i class="fas fa-times"></i>
@@ -438,29 +454,42 @@
 
             <div class="help-content">
                 <div class="help-section">
-                    <h3><i class="fas fa-camera"></i> Chụp Ảnh</h3>
+                    <h3><i class="fas fa-camera"></i> 📸 Chụp Ảnh Ma Thuật</h3>
                     <ul>
-                        <li>Nhấn "Chụp Ảnh" để chụp 1 ảnh</li>
+                        <li>Nhấn "Chụp Ảnh" để chụp 1 ảnh tuyệt đẹp</li>
                         <li>Chọn số ảnh và nhấn "Chụp Liên Tiếp" để chụp tự động</li>
-                        <li>Đếm ngược 3-2-1 trước khi chụp</li>
+                        <li>Đếm ngược 3-2-1 với hiệu ứng sparkle trước khi chụp</li>
+                        <li>Phím tắt: Space để chụp ảnh nhanh</li>
                     </ul>
                 </div>
 
                 <div class="help-section">
-                    <h3><i class="fas fa-video"></i> Quay Video</h3>
+                    <h3><i class="fas fa-video"></i> 🎬 Quay Video Đẹp</h3>
                     <ul>
-                        <li>Nhấn "Quay Video" để bắt đầu quay</li>
-                        <li>Nhấn lại để dừng quay</li>
-                        <li>Video sẽ được lưu tự động</li>
+                        <li>Nhấn "Quay Video" để bắt đầu quay video HD</li>
+                        <li>Nhấn lại để dừng quay với hiệu ứng mờ ảo</li>
+                        <li>Video sẽ được lưu tự động với chất lượng cao</li>
+                        <li>Phím tắt: Ctrl+R để bắt đầu/dừng quay</li>
                     </ul>
                 </div>
 
                 <div class="help-section">
-                    <h3><i class="fas fa-edit"></i> Chỉnh Sửa</h3>
+                    <h3><i class="fas fa-edit"></i> 🎨 Chỉnh Sửa Siêu Đẹp</h3>
                     <ul>
-                        <li>Nhấn vào ảnh để chỉnh sửa</li>
-                        <li>Thêm sticker, áp dụng filter</li>
-                        <li>Điều chỉnh màu sắc và thay nền</li>
+                        <li>Nhấn vào ảnh để mở trình chỉnh sửa ma thuật</li>
+                        <li>Thêm sticker đáng yêu, áp dụng filter tuyệt đẹp</li>
+                        <li>Điều chỉnh màu sắc và thay nền cực kì đẹp mắt</li>
+                        <li>Kéo thả sticker, nhấn Delete để xóa</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h3><i class="fas fa-palette"></i> 🌸 Theme Hồng Đặc Biệt</h3>
+                    <ul>
+                        <li>Giao diện hồng sáng phù hợp photobooth</li>
+                        <li>Hiệu ứng sparkle và heart lấp lánh</li>
+                        <li>Màu sắc tươi sáng, vui tươi và năng động</li>
+                        <li>Tối ưu cho mobile và desktop</li>
                     </ul>
                 </div>
             </div>
